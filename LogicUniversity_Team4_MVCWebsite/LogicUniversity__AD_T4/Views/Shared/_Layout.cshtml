@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html ng-app="LogicuniversityApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+   
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+
+</head>
+<body class="bodybg">
+    <div class="banner col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <header>
+            <div class="col-md-2 col-md-offset-1 col-sm-2">
+                <img src="~/images/logo/Logic-Logo.png" style="height: 65px; margin-top: 8px; width: 145px !important;" />
+            </div>
+        </header>
+    </div>
+    <div class="navbar navbar-inverse fixed-top">
+        <div class="container" style="margin-right: 20px !important;">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @if (Session["role"] != null)
+            {
+                if (Session["role"].ToString().Equals("Employee"))
+                {
+                        @Html.ActionLink("Team4 Logic University", "Home", "Employee", new { area = "" }, new { @class = "navbar-brand", @style = "margin-right: 0px !important;" })
+                        @Html.ActionLink("Requestion List", "RequestionList", "Employee", new { area = "" }, new { @class = "navbar-brand", @style = "margin-right: 0px !important;" })
+                        @Html.ActionLink("Request Items", "RequestItems", "Employee", new { area = "" }, new { @class = "navbar-brand", @style = "margin-right: 0px !important;" })
+                    }
+                    if (Session["role"].ToString().Equals("StoreMen"))
+                    {
+                        @Html.ActionLink("Team4 Logic University", "Home", "StoreMen", new { area = "" }, new { @class = "navbar-brand" })
+                    }
+                    if (Session["role"].ToString().Equals("DepHead"))
+                    {
+                        @Html.ActionLink("Team4 Logic University", "Home", "DepartmentHead", new { area = "" }, new { @class = "navbar-brand" })
+                    }
+                }
+@*                @Html.ActionLink("Team4 Logic University", "MainPage", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+
+
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+
+                    <li>
+@*                        @if (Session["role"] != null)*@
+@*                        {*@
+@*                            if (Session["role"].ToString().Equals("employee"))*@
+@*                            {*@
+@*                                @Html.ActionLink("Home", "Home", "Employee", new { area = "" }, null)*@
+@*                            }*@
+@*                            if (Session["role"].ToString().Equals("StoreMen"))*@
+@*                            {*@
+@*                                @Html.ActionLink("Home", "Home", "StoreMen", new { area = "" }, null)*@
+@*                            }*@
+@*                            if (Session["role"].ToString().Equals("DepHead"))*@
+@*                            {*@
+@*                                @Html.ActionLink("Home", "Home", "DepartmentHead", new { area = "" }, null)*@
+@*                            }*@
+@*                        }*@
+@*                        @Html.ActionLink("Home", "MainPage", "Home", new { area = "" }, null)*@
+
+
+                    </li>
+            @if (Session["role"] == null)
+            {
+                <li>@Html.ActionLink("About Us", "About", "Home", new {area = ""}, null)</li>
+                <li>@Html.ActionLink("Contact Us", "Contact", "Home", new {area = ""}, null)</li>
+            }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container body-content" style="padding-bottom: 50px !important;">
+        @RenderBody()
+    </div>
+    <hr />
+    <p style="color: #F8F8FF; text-align: center">&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+ 
+
+ 
+    <script type="text/javascript">
+$(document).ready(function() {
+//  $(".js-example-basic-single").select2();
+});
+    </script>
+</body>
+
+</html>

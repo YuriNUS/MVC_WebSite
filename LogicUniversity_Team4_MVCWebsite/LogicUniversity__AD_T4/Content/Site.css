@@ -1,0 +1,21 @@
+﻿.bodybg {
+background: #232526; /* fallback for old browsers */
+background: -webkit-linear-gradient(to left, #232526 , #414345); /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to left, #232526 , #414345); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                   
+}
+.glassbg {
+    position: relative;
+    padding: 10px 0;
+    background: #696969; /* fallback for old browsers */              
+    z-index: 1049;
+    height: 400px;
+}
+.banner {
+    margin-top: 0px !important;
+    padding-top: 0px !important;
+    height: 85px;
+    background: #283048; 
+    background: -webkit-linear-gradient(to left, #283048 , #859398); 
+    background: linear-gradient(to left, #283048 , #859398);        
+}

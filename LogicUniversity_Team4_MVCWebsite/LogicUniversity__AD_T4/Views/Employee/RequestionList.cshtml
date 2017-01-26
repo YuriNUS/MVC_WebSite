@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "RequestionList";
+}
+
+@Styles.Render("~/Content/css")
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/Select2/select.css" rel="stylesheet" />
+<link href="~/Content/css/ng-table.css" rel="stylesheet" />
+<script src="~/Scripts/Angular/angular1.2.js"></script>
+<script src="~/Scripts/Angular/angular-sanitize1.2.js"></script>
+<script src="~/Scripts/Angular/ng-table.js"></script>
+<script src="~/Scripts/Angular/angular-resciouse.js"></script>
+<link href="~/Content/Select2/select2.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<script src="~/Scripts/Select2/select.js"></script>
+
+<form name="styreqform" method="post" ng-app="LogicuniversityApp">
+    <div class="col-md-12 col-sm-12">
+        <div class="col-md-11 col-md-1 col-sm-12">
+            <div class="panel panel-default col-md-11 col-md-offset-1 col-sm-12" ng-controller="requestionlist">
+                <div class="panel-body">
+                    <h2>Request History</h2>
+                    <hr/>
+                    <div class="col-md-12 ">
+                        <div class="list-group">
+                            <ul style="text-decoration: none !important;">
+                                <li class="list-group-item " ng-repeat="requestionlist in RequestionList">
+                                    <div class="card">
+                                        <h4 class="list-group-item-heading">
+                                            {{requestionlist.TransDate| date:'shortDate'}}
+                                            <button type="submit" id="{{requestionlist.ID}}" class="btn btn-default pull-right" aria-label="Left Align" data-ng-click="Delete($event,$index)" style="">
+                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                            </button>
+                                        </h4>
+
+                                        <p class="list-group-item-text">{{requestionlist.Status}}</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="~/Scripts/ApiCallService.js"></script>
+<script>
+    var app = angular.module('LogicuniversityApp');
+    app.controller('requestionlist',
+    [
+        '$scope', '$http', 'ApiCall', function ($scope, $http, ApiCall) {
+            $scope.RequestionList = {};
+            
+        
+            ApiCall.GetApiCall("Requitition", "getall")
+                               .then(function (RequestionListData) {
+                                   $scope.RequestionList = RequestionListData.data;
+                              
+
+                               });
+            $scope.Delete = function (event,idx) {
+                var id = event.target.id;
+                ApiCall.ApiPut("Requitition", "delete", id);
+                $scope.RequestionList.splice(idx,1);
+
+
+            };
+    }]);
+</script>

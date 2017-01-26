@@ -1,0 +1,72 @@
+﻿@model string
+
+@{
+    ViewBag.Title = "title";
+
+}
+
+<link href="~/Content/Site.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/Select2/select.css" rel="stylesheet" />
+<link href="~/Content/css/ng-table.css" rel="stylesheet" />
+<script src="~/Scripts/Angular/angular1.2.js"></script>
+<script src="~/Scripts/Angular/angular-sanitize1.2.js"></script>
+<script src="~/Scripts/Angular/ng-table.js"></script>
+<script src="~/Scripts/Angular/angular-resciouse.js"></script>
+<link href="~/Content/Select2/select2.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<script src="~/Scripts/Select2/select.js"></script>
+<form name="styreqform" method="post" ng-app="LogicuniversityApp">
+    <div class="col-md-12 col-sm-12">
+        <div class="col-md-11 col-md-1 col-sm-12">
+            <div class="panel panel-default col-md-11 col-md-offset-1 col-sm-12" ng-controller="requestedlist">
+                <div class="panel-body">
+                    <h2>Requested Lists</h2>
+
+                    <hr/>
+                    <div class="col-md-12 ">
+                        <div class="list-group">
+                            <ul style="text-decoration: none !important;">
+                                <li class="list-group-item " ng-repeat="requestedlists in RequestedList">
+                                    <div class="card">
+                                        <h4 class="list-group-item-heading">
+                                            {{requestedlists.TransDate| date:'shortDate'}}
+                                            <button type="submit" id="{{requestedlists.ID}}" class="btn btn-success pull-right" aria-label="Left Align" data-ng-click="Delete($event,$index)" style="margin-left: 5px !important;">
+                                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                            </button>
+                                            <button type="submit" id="{{requestedlists.ID}}" class="btn btn-danger pull-right" aria-label="Left Align" data-ng-click="Delete($event,$index)" style="margin-right: 5px !important;">
+                                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                            </button>
+                                        </h4>
+
+                                        <p class="list-group-item-text">{{requestedlists.EmployeeId}}</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script src="~/Scripts/ApiCallService.js"></script>
+    <script>
+        var app = angular.module('LogicuniversityApp');
+        app.controller('requestedlist',
+        [
+            '$scope', '$http', 'ApiCall', function ($scope, $http, ApiCall) {
+                $scope.RequestedList = {};
+
+
+                ApiCall.GetApiCall("Requitition", "getbystatus")
+                    .then(function (RequestedListData) {
+                        $scope.RequestedList = RequestedListData.data;
+
+
+                    });
+            }
+        ]);
+    </script>

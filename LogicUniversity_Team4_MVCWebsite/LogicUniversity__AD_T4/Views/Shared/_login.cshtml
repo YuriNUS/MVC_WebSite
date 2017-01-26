@@ -1,0 +1,36 @@
+﻿@using DI.Core
+@model DI.Core.LoginViewModel
+<div class="glassbg " style="margin-top:100px;">
+    <div class="modal-title" style="padding-left: 10px; margin-left: 5px;">
+        <h2 style="color: #F8F8FF"> Login</h2>
+
+    </div>
+@using (Html.BeginForm("MainPage", "Home", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="container" style="padding-top: 30px;">
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new {@class = "h4", @style = "color: #F8F8FF;"})
+
+
+            @Html.TextBoxFor(m => m.Email, new {@class = "form-control",})
+            @Html.ValidationMessageFor(m => m.Email, "", new {@class = "text-danger"})
+
+
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new {@class = "h4", @style = "color: #F8F8FF;"})
+
+            @Html.PasswordFor(m => m.Password, new {@class = "form-control"})
+            @Html.ValidationMessageFor(m => m.Password, "", new {@class = "text-danger"})
+
+        </div>
+    </div>
+    <input type="submit" class="btn btn-success" value="Login" style="margin-top: 20px; margin-left: 14px;">
+
+   
+}
+    </div >
+
+
